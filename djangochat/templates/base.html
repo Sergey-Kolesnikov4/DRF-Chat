@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{%load static %}
+
+    <style>
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <title>Djangochat</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="container">
+            	<a href="{%url 'home'%}" class="logo">Djangochat</a>
+            	<nav class="nav">
+	            	<a href="{%url 'home'%}"><i class="bi bi-house-fill"></i> Домой</a>
+	                {% if request.user.is_authenticated %}
+		                	<a href="{% url 'profile' %}" title="Update my profile">Здравствуй, {{request.user | title}}</a>
+	    	                <a href="{% url 'logout' %}" class="btn btn-outline">Выход</a>
+	                {% else %}
+							<a href="{% url 'login' %}" class="btn btn-outline">Вход</a>
+	            	        <a href="{% url 'register' %}" class="btn btn-primary">Присоединяйтесь прямо сейчас</a>
+	                {% endif %}
+	             </nav>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+            	{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-{{message.tags}}">
+					       {{message}}
+					     </div>
+					   {% endfor %}
+				{% endif %}
+            
+             {%block content %}
+             {%endblock content%}
+            </div>
+        </main>
+    {% block scripts %}{% endblock %}
+    </body>
+
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+
+<div class="center">
+	<form method="POST" enctype="multipart/form-data" class="card">
+		{% csrf_token %} 
+		
+	    {% if user.profile %}
+			<img src="{{user.profile.avatar.url}}" alt="{{ user.username }}" class="avatar"  accept=".jpg,.jpeg,.png"/>
+	    {% endif %}
+	    
+	    <h2 class="text-center">{{ user.username | title }}</h2>
+		<hr>
+		
+		<label for="avatar">Аватар:</label>
+		<input type="file" name="avatar" id="avatar">	
+		
+	    <button type="submit" class="btn btn-primary full-width">Обновить профиль</button>
+	
+	</form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<h1>Список всех пользователей</h1>
+<br>
+
+    {% for profile in Profiles %}
+<section>
+<h2>{{ profile }}</h2>
+            <img style="text-align: left;" src="{{profile.avatar.url}}" alt="{{ profile.username }}" class="avatar"  accept=".jpg,.jpeg,.png"/>
+<br>
+<hr>
+</section>
+    {% endfor %}
+
+
+{% endblock %}

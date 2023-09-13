@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{% load rest_framework %}
+
+<h1>Чат - {{ chat.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {% render_form serializer %}
+    <input type="submit" value="Сохранить">
+</form>
+
+{%endblock content%}
